@@ -73,7 +73,7 @@ class UserController extends Controller
             }
         }
         $user->delete();
-        return redirect()->route('user.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('backend.user.index')->with('success', 'Data berhasil dihapus');
     }
 
     public function edit(string $id)
@@ -98,8 +98,7 @@ class UserController extends Controller
             'foto' => 'image|mimes:jpeg,jpg,png,gif|file|max:1024',
         ];
         $messages = [
-            'foto.image' => 'Format gambar gunakan file dengan ekstensi jpeg, jpg, png, 
-atau gif.',
+            'foto.image' => 'Format gambar gunakan file dengan ekstensi jpeg, jpg, png, atau gif.',
             'foto.max' => 'Ukuran file gambar Maksimal adalah 1024 KB.'
         ];
         if ($request->email != $user->email) {
@@ -126,7 +125,6 @@ atau gif.',
             $validatedData['foto'] = $originalFileName;
         }
         $user->update($validatedData);
-        return redirect()->route('backend.user.index')->with('success', 'Data berhasil 
-diperbaharui');
+        return redirect()->route('backend.user.index')->with('success', 'Data berhasil diperbaharui');
     }
 }
