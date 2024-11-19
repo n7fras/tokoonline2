@@ -29,6 +29,4 @@ Route::post('backend/logout', [LoginController::class, 'logoutBackend'])->name('
 // Route::resource('backend/user', UserController::class)->middleware('auth');
 Route::resource('/backend/user', UserController::class, ['as' => 'backend'])->middleware('auth');
 
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('backend.user.destroy');
-
-
+// Route::resource('backend/user', UserController::class)->middleware('auth');
