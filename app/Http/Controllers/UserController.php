@@ -9,9 +9,23 @@ use App\Helpers\ImageHelper;
 
 class UserController extends Controller
 {
-    /**
-     * function lainnya
-     */
+    public function index()
+    {
+        $judul = 'Data User';
+        $users = User::all(); // atau User::paginate(10) untuk pagination
+
+        return view('backend.v_user.index', [
+            'judul' => $judul,
+            'users' => $users
+        ]);
+    }
+
+    public function create()
+    {
+        $judul = 'Tambah User';
+        return view('backend.v_user.create', compact('judul'));
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -44,12 +58,75 @@ class UserController extends Controller
         if (preg_match($pattern, $password)) {
             $validatedData['password'] = Hash::make($validatedData['password']);
             User::create($validatedData, $messages);
-            return redirect()->route('user.index')->with('success', 'Data berhasil tersimpan');
+            return redirect()->route('backend.user.index')->with('success', 'Data berhasil tersimpan');
         } else {
             return redirect()->back()->withErrors(['password' => 'Password harus terdiri dari kombinasi huruf besar, huruf kecil, angka, dan simbol karakter.']);
         }
     }
-    /**
-     * function lainnya
-     */
+    public function destroy(string $id)
+    {
+        $user = user::findOrFail($id);
+        if ($user->foto) {
+            $oldImagePath = public_path('storage/img-user/') . $user->foto;
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+        $user->delete();
+        return redirect()->route('user.index')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function edit(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view('backend.v_user.edit', [
+
+            'judul' => 'Ubah User',
+            'edit' => $user
+        ]);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        //ddd($request);
+        $user = User::findOrFail($id);
+        $rules = [
+            'nama' => 'required|max:255',
+            'role' => 'required',
+            'status' => 'required',
+            'hp' => 'required|min:10|max:13',
+            'foto' => 'image|mimes:jpeg,jpg,png,gif|file|max:1024',
+        ];
+        $messages = [
+            'foto.image' => 'Format gambar gunakan file dengan ekstensi jpeg, jpg, png, 
+atau gif.',
+            'foto.max' => 'Ukuran file gambar Maksimal adalah 1024 KB.'
+        ];
+        if ($request->email != $user->email) {
+            $rules['email'] = 'required|max:255|email|unique:user';
+        }
+        $validatedData = $request->validate($rules, $messages);
+        // menggunakan ImageHelper
+        if ($request->file('foto')) {
+            //hapus gambar lama
+            if ($user->foto) {
+                $oldImagePath = public_path('storage/img-user/') . $user->foto;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $originalFileName = date('YmdHis') . '_' . uniqid() . '.' . $extension;
+            $directory = 'storage/img-user/';
+            // Simpan gambar dengan ukuran yang ditentukan
+            ImageHelper::uploadAndResize($file, $directory, $originalFileName, 385, 400);
+            // null (jika tinggi otomatis)
+            // Simpan nama file asli di database
+            $validatedData['foto'] = $originalFileName;
+        }
+        $user->update($validatedData);
+        return redirect()->route('backend.user.index')->with('success', 'Data berhasil 
+diperbaharui');
+    }
 }
