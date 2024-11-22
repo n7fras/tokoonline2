@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <label>Hak Ases</label>
+                                    <label>Hak Akses</label>
                                     <select name="role" class="form-control @error('role') is-invalid @enderror">
                                         <option value="" {{ old('role', $edit->role) == '' ? 'selected' : '' }}> -
                                             Pilih Hak Akses -</option>
@@ -53,7 +53,6 @@
                                     <select name="status" class="form-control @error('status') is-invalid @enderror">
                                         <option value="" {{ old('status', $edit->status) == '' ? 'selected' : '' }}> -
                                             Pilih Hak Akses -</option>
-                                        WEB PROGRAMMING II 104
                                         <option value="1" {{ old('status', $edit->status) == '1' ? 'selected' : '' }}>
                                             Aktif</option>
                                         <option value="0" {{ old('status', $edit->status) == '0' ? 'selected' : '' }}>
