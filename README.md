@@ -1,6 +1,6 @@
-<h1>Pertemuan 7</h1>
+<h1>Pertemuan 9</h1>
 <h2><i>Sudah Selesai</i></h2> 
-<i>7.6. SweetAlert</i> 
+<i>Membuat Kategori</i> 
 
-Tinggal pertemuan selanjutnya<b>(Pertemuan 8)</b>
+Tinggal pertemuan selanjutnya<b>(Pertemuan 10)</b>
 
