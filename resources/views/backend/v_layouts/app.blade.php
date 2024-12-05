@@ -309,6 +309,31 @@
             });
         });
     </script>
+    <script>
+        // Preview Foto
+        function previewFoto() {
+            const foto = document.querySelector('input[name="foto"]'); // Memperbaiki selektor
+            const fotoPreview = document.querySelector('.foto-preview'); // Memastikan elemen preview gambar
+            fotoPreview.style.display = 'block'; // Menampilkan elemen gambar preview
+
+            const fotoReader = new FileReader();
+            fotoReader.readAsDataURL(foto.files[0]);
+
+            fotoReader.onload = function(fotoEvent) {
+                fotoPreview.src = fotoEvent.target.result; // Mengatur gambar preview
+                fotoPreview.style.width = '100%'; // Memperbaiki properti width
+            }
+        }
+    </script>
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script> -->
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#ckeditor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 </body>
 
 </html>
