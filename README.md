@@ -1,8 +1,12 @@
-<h1>Pertemuan 11</h1>
-<h2><i>Sudah Selesai</i></h2> 
-<i>Preview Gambar</i> ,
-<i>Menggunakan CKEditor</i> ,
-<i>Foto Produk</i> ,
+# Pertemuan 12 
+<br>
+<br>
+> [!NOTE]
+> Pertemuan 13 Persiapan presentasi project.
 
-Tinggal pertemuan selanjutnya<b>(Pertemuan 12)</b>
+> [!TIP]
+> Bila ada error tanyakan ke **[Chat GPT](https://chat.openai.com/).**
+
+> [!IMPORTANT]
+> Ini hanya untuk dokumentasi <ins>TUGAS</ins>
 
