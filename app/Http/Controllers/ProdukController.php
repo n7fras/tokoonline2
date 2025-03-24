@@ -21,6 +21,18 @@ class ProdukController extends Controller
             'index' => $produk
         ]);
     }
+    public function detail($id) 
+    { 
+        $fotoProdukTambahan = FotoProduk::where('produk_id', $id)->get(); 
+        $detail = Produk::findOrFail($id); 
+        $kategori = Kategori::orderBy('nama_kategori', 'desc')->get(); 
+        return view('v_produk.detail', [ 
+            'judul' => 'Detail Produk', 
+            'kategori' => $kategori, 
+            'row' => $detail, 
+            'fotoProdukTambahan' => $fotoProdukTambahan 
+        ]); 
+    } 
     /**
      * Show the form for creating a new resource.
      */
@@ -287,4 +299,6 @@ class ProdukController extends Controller
             'cetak' => $produk
         ]);
     }
+
+    
 }

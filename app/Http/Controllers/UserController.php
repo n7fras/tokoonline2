@@ -107,19 +107,21 @@ class UserController extends Controller
         $validatedData = $request->validate($rules, $messages);
         // menggunakan ImageHelper
         if ($request->file('foto')) {
-            //hapus gambar lama
+            // Hapus gambar lama jika ada
             if ($user->foto) {
                 $oldImagePath = public_path('storage/img-user/') . $user->foto;
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
             }
+        
+            // Simpan gambar baru
             $file = $request->file('foto');
             $extension = $file->getClientOriginalExtension();
             $originalFileName = date('YmdHis') . '_' . uniqid() . '.' . $extension;
             $directory = 'storage/img-user/';
-            // Simpan gambar dengan ukuran yang ditentukan
             ImageHelper::uploadAndResize($file, $directory, $originalFileName, 385, 400);
+        
             // null (jika tinggi otomatis)
             // Simpan nama file asli di database
             $validatedData['foto'] = $originalFileName;
