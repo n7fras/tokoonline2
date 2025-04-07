@@ -20,8 +20,7 @@
                         <button class="main-btn quick-view"><i class="fa fa-search
 plus"></i> Detail Produk</button> 
                     </a> 
-                    <img src="{{ asset('storage/img-produk/thumb_md_' . $row->foto) }}" 
-alt=""> 
+                    <img src="{{ asset('storage/img-produk/thumb_md_'. $row->foto) }}" alt=""> 
                 </div> 
                 <div class="product-body"> 
                     <h3 class="product-price"> Rp. {{ number_format($row->harga, 0, ',', 
