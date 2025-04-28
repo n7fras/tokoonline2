@@ -180,6 +180,7 @@
                                 <li class="sidebar-item"><a href="{{ route('backend.laporan.formproduk') }}" class="sidebar-link"><i class="mdi mdi-chevron-right"></i><span class="hide-menu"> Produk </span></a></li>
                             </ul>
                         </li>
+                       
                     </ul>
                 </nav>
 

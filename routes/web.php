@@ -59,3 +59,6 @@ Route::post('/logout', [CustomerController::class, 'logout'])->name('customer.lo
 
 //Route Customer
 Route::resource('backend/customer', CustomerController::class, ['as' => 'backend'])->middleware('auth'); 
+// Route untuk menampilkan halaman akun customer 
+Route::get('/customer/akun/{id}', [CustomerController::class, 'akun'])->name('customer.akun')->middleware('is.customer'); 
+Route::put('/customer/akun/{id}/update', [CustomerController::class, 'updateAkun'])->name('customer.akun.update')->middleware('is.customer'); 
