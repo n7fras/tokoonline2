@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -8,7 +9,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\RajaOngkirController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,3 +78,50 @@ Route::middleware('is.customer')->group(function () {
     Route::post('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('order.addToCart'); 
     Route::get('cart', [OrderController::class, 'viewCart'])->name('order.cart'); 
 }); 
+//  #cek api rajaongkir
+//  Route::get('/cek-ongkir', function () {
+//     $baseurl = env('RAJAONGKIR_BASE_URL');
+   
+
+//     $response = Http::asForm()->withHeaders([
+//         'key' => 'qnFgYX9I5840bbd550a62aa5uv6f1dua',
+//         'Accept' => 'application/json'
+//     ])->post("https://rajaongkir.komerce.id/api/v1/calculate/domestic-cost", [
+//         'origin' => '501',
+//         'destination' => '114',
+//         'weight' => 1000,
+//         'courier' => 'jne'
+//     ]);
+
+//     dd($response->json());
+// });
+Route::get('/cek-ongkir', function () { 
+    return view('ongkir'); 
+}); 
+ 
+Route::get('/location', [RajaOngkirController::class, 'getLocation']);
+Route::post('/cost', [RajaOngkirController::class, 'getCost']);
+
+
+
+
+// Route::get('/search-destination', function () {
+//     // Keyword untuk pencarian
+//     $keyword = 'jakarta';
+
+//     // Kirim permintaan GET ke API Search Destination
+//     $response = Http::withHeaders([
+//         'x-api-key' => 'dp3KijAw5840bbd550a62aa5frenxfy4',
+//         'accept' => 'application/json',
+//     ])->get("https://api-sandbox.collaborator.komerce.id/tariff/api/v1/destination/search?keyword=bekasi");
+
+//     if ($response->status() === 200) {
+//         // Jika sukses, tampilkan hasil JSON
+//         dd($response->json());
+//     } else {
+//         // Jika ada error, tampilkan status dan body error
+//         dd($response->status(), $response->body());
+//     }
+// });
+
+
