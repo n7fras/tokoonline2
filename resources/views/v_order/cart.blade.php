@@ -62,7 +62,7 @@ $item->produk->foto) }}" alt=""></td>
                     </td> 
                     <td class="price text-center"><strong>Rp. {{ number_format($item->harga, 0, ',', '.') }}</strong></td> 
                     <td class="qty text-center"> 
-                        <form action="#" method="post"> 
+                        <form action="{{route('order.updateCart',$item->id)}}" method="post"> 
                             @csrf 
                             <input type="number" name="quantity" value="{{ $item->quantity 
 }}" min="1" style="width: 60px;"> 

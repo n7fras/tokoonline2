@@ -11,8 +11,7 @@
 
 <body>
     <form id="ongkirForm">
-        <label id="alamat">Alamat Lengkap:</label><br>
-        <textarea name="Alamat" id="alamat" cols="30" rows="10"></textarea><br><br>
+   
         <label>Lokasi Tujuan:</label><br>
         <select id="destination" placeholder="Ketik kota atau provinsi..."></select>
         <br><br>

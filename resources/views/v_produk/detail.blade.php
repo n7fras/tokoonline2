@@ -71,12 +71,18 @@ alt="">
                 </div> 
  
                 <div class="product-btns"> 
+                    @auth
                     <form action="{{ route('order.addToCart', $row->id) }}" method="post" 
                         style="display: inline-block;" title="Pesan Ke Aplikasi"> 
                         @csrf 
                         <button type="submit" class="primary-btn add-to-cart"><i 
                                 class="fa fa-shopping-cart"></i> Pesan</button> 
                     </form> 
+                    @else
+                    <a href="{{ route('login') }}" class="primary-btn add-to-cart" onclick="return confirm('Anda harus login terlebih dahulu');">
+                        <i class="fa fa-shopping-cart"></i> Pesan
+                    </a>
+                @endauth
                 </div> 
             </div> 
         </div> 

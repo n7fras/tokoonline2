@@ -14,6 +14,7 @@ class OrderController extends Controller
     //
     public function addToCart($id) 
     { 
+       
         $customer = Customer::where('user_id', Auth::id())->first(); 
         $produk = Produk::findOrFail($id); 
  
@@ -36,7 +37,7 @@ class OrderController extends Controller
         $order->save(); 
  
         return redirect()->route('order.cart')->with('success', 'Produk berhasil 
-ditambahkan ke keranjang'); 
+ditambahkan ke keranjang');
     } 
  
     public function viewCart() 
@@ -49,4 +50,33 @@ ditambahkan ke keranjang');
         } 
         return view('v_order.cart', compact('order')); 
     }
+    public function updateCart($item_id)
+{
+    $orderItem = OrderItem::findOrFail($item_id);
+
+    // Pastikan item milik customer yang login
+    $customer = Customer::where('user_id', Auth::id())->first();
+    if ($orderItem->order->customer_id !== $customer->id) {
+        return redirect()->back()->with('error', 'Akses ditolak');
+    }
+
+    $quantity = request('quantity');
+
+    if ($quantity < 1) {
+        return redirect()->back()->with('error', 'Jumlah tidak valid');
+    }
+
+    $orderItem->quantity = $quantity;
+    $orderItem->save();
+
+    // Update total harga di order
+    $order = $orderItem->order;
+    $order->total_harga = $order->orderItems->sum(function ($item) {
+        return $item->harga * $item->quantity;
+    });
+    $order->save();
+
+    return redirect()->back()->with('success', 'Keranjang diperbarui');
+}
+
 }

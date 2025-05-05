@@ -57,6 +57,11 @@ Route::get('/auth/redirect', [CustomerController::class, 'redirect'])->name('aut
 Route::get('/auth/google/callback', [CustomerController::class, 'callback'])->name('auth.callback'); 
 // Logout 
 Route::post('/logout', [CustomerController::class, 'logout'])->name('customer.logout'); 
+// Buat route /login agar Laravel bisa redirect ke sini saat user belum login
+Route::get('/login', function () {
+    return redirect()->route('auth.redirect'); // langsung redirect ke login Google
+})->name('login');
+
 
 //Route Customer
 Route::resource('backend/customer', CustomerController::class, ['as' => 'backend'])->middleware('auth'); 
@@ -77,6 +82,8 @@ Route::middleware('is.customer')->group(function () {
     // Route untuk menambahkan produk ke keranjang 
     Route::post('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('order.addToCart'); 
     Route::get('cart', [OrderController::class, 'viewCart'])->name('order.cart'); 
+    Route::post('cart/update/{item_id}', [OrderController::class, 'updateCart'])->name('order.updateCart');
+
 }); 
 //  #cek api rajaongkir
 //  Route::get('/cek-ongkir', function () {
