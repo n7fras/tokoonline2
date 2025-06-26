@@ -148,9 +148,6 @@
 
                         <li><a href="{{route('produk.kategori',$row->id)}}">{{$row->nama_kategori}}</a></li>
                         @endforeach
-
-
-                    
                 </div>
                 @else
                 <div class="category-nav show-on-click">

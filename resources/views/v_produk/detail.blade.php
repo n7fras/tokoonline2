@@ -17,25 +17,23 @@
         <div class="col-md-6"> 
             <div id="product-main-view"> 
                 <div class="product-view"> 
-                    <img src="{{ asset('storage/img-produk/thumb_lg_' . $row->foto) }}" 
-alt=""> 
+                    <img src="{{ asset('storage/img-produk/thumb_lg_' . $row->foto) }}" alt=""> 
                 </div> 
                 @foreach ($fotoProdukTambahan as $item) 
-                <div class="product-view"> 
                     @if ($item->produk_id == $row->id) 
+                    <div class="product-view"> 
                     <img src="{{ asset('storage/img-produk/' . $item->foto) }}" alt=""> 
                     @else 
                     @endif 
                 </div> 
                 @endforeach 
-            </div> 
-            <div id="product-view"> 
+                </div> 
+                <div id="product-view"> 
  
 
  
                 <div class="product-view"> 
-                    <img src="{{ asset('storage/img-produk/thumb_sm_' . $row->foto) }}" 
-alt=""> 
+                    <img src="{{ asset('storage/img-produk/thumb_sm_' . $row->foto) }}" alt=""> 
                 </div> 
                 @foreach ($fotoProdukTambahan as $item) 
                 <div class="product-view"> 
@@ -46,7 +44,7 @@ alt="">
                 </div> 
                 @endforeach 
             </div> 
-        </div> 
+            </div> 
         <div class="col-md-6"> 
             <div class="product-body"> 
                 <div class="product-label"> 

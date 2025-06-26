@@ -96,7 +96,7 @@ diperbarui');
 
  
             $socialUser = Socialite::driver('google')->user(); 
-            dd($socialUser);
+            // dd($socialUser);
 
             // Cek apakah email sudah terdaftar 
             $registeredUser = User::where('email', $socialUser->email)->first(); 
